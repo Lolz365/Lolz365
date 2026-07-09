@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,50:111111,100:ffffff&height=220&section=header&text=LOLZ365&fontSize=90&fontColor=ffffff&animation=fadeIn&fontAlignY=40&desc=building+things+that+shouldn't+exist&descAlignY=60&descAlign=50&descColor=888888&stroke=222222&strokeWidth=1" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:000000,50:111111,100:ffffff&height=220&section=header&text=LOLZ365&fontSize=90&fontColor=ffffff&animation=fadeIn&fontAlignY=40&desc=open+source+%2F+ai+%2F+building+in+public&descAlignY=60&descAlign=50&descColor=888888&stroke=222222&strokeWidth=1" width="100%"/>
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=22&duration=3000&pause=800&color=FFFFFF&center=true&vCenter=true&width=600&lines=Full-Stack+Engineer;AI+%2F+ML+Builder;WebGL+%2F+Three.js+Developer;LLM+%26+RAG+Systems;Rust+%2B+WASM+Enthusiast;Shipping+in+silence.)](https://github.com/Lolz365)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=22&duration=3000&pause=800&color=FFFFFF&center=true&vCenter=true&width=600&lines=Open+Source+Contributor;AI+%2F+ML+Engineer;WebGL+%2F+Three.js+Developer;LLM+%26+RAG+Systems;Building+in+public.;Shipping+tools+that+matter.)](https://github.com/Lolz365)
 
 ---
 
@@ -34,7 +34,7 @@
 ---
 
 ```
-  null://lolz365 — the work speaks. the rest is noise.
+  null://lolz365 — open source first. AI always. the rest is details.
 ```
 
 ### [`→ enter the space`](https://lolz365.github.io/Lolz365)

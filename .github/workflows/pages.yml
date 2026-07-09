@@ -22,6 +22,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Override commit author display in Actions logs
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git author as Lolz365
+        run: |
+          git config user.name "Lolz365"
+          git config user.email "lolz365@users.noreply.github.com"
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
