@@ -27,8 +27,6 @@
 html,body{width:100%;height:100%;background:var(--bg);color:var(--fg);font-family:'JetBrains Mono',monospace;overflow:hidden;transition:background .5s,color .5s}
 #canvas-container{position:fixed;inset:0;z-index:0}
 canvas{display:block;width:100%;height:100%}
-
-/* NAV */
 #nav{position:fixed;top:0;left:0;right:0;z-index:30;padding:1.4rem 2rem;display:flex;justify-content:space-between;align-items:center;pointer-events:all;background:linear-gradient(to bottom,rgba(0,0,0,.5) 0%,transparent 100%)}
 [data-theme="light"] #nav{background:linear-gradient(to bottom,rgba(255,255,255,.7) 0%,transparent 100%)}
 .logo{font-size:.95rem;font-weight:900;letter-spacing:-.03em;color:var(--fg);text-decoration:none}
@@ -37,36 +35,24 @@ canvas{display:block;width:100%;height:100%}
 .nav-btn{background:rgba(0,0,0,.35);border:1px solid var(--border);color:var(--fg);padding:.35rem .85rem;font-family:inherit;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:.3rem;backdrop-filter:blur(8px)}
 [data-theme="light"] .nav-btn{background:rgba(255,255,255,.5)}
 .nav-btn:hover{background:var(--fg);color:var(--bg)}
-
-/* SIDE DOTS — 3 sections */
 .nav-dots{position:fixed;right:1.8rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.8rem;z-index:20}
 .dot{width:5px;height:5px;border-radius:50%;background:var(--dim);cursor:pointer;transition:all .3s;border:none;padding:0;outline:none}
 .dot.active{background:var(--fg);transform:scale(1.8)}
-
-/* SECTIONS */
 .section{position:fixed;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;flex-direction:column;pointer-events:none;opacity:0;transition:opacity .65s cubic-bezier(.4,0,.2,1);text-align:center;padding:5rem 2rem 12rem}
 .section.active{opacity:1;pointer-events:all}
-
-/* HERO */
 .hero-eyebrow{font-size:.58rem;letter-spacing:.4em;text-transform:uppercase;color:var(--muted);margin-bottom:1.6rem}
 .hero-name{font-size:clamp(4rem,13vw,11rem);font-weight:900;letter-spacing:-.06em;line-height:.85;color:var(--fg);user-select:none}
 .hero-name .sub{display:block;font-size:.3em;letter-spacing:.04em;font-weight:300;color:var(--muted);margin-top:.6rem}
 .hero-sub{font-size:.7rem;color:var(--text-secondary);letter-spacing:.18em;text-transform:uppercase;margin-top:1.8rem;line-height:2.2}
 .scroll-hint{position:fixed;bottom:9rem;left:50%;transform:translateX(-50%);font-size:.56rem;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);animation:bob 2.5s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
-
-/* SECTION LABEL */
 .sec-label{font-size:.54rem;letter-spacing:.35em;text-transform:uppercase;color:var(--muted);margin-bottom:2.2rem;opacity:.65}
-
-/* STACK */
 .stack-wrap{display:flex;flex-direction:column;gap:1.6rem;max-width:680px;width:100%}
 .stack-group{display:flex;flex-direction:column;gap:.6rem}
 .stack-group-name{font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);opacity:.5;text-align:left}
 .chips{display:flex;gap:.4rem;flex-wrap:wrap}
 .chip{border:1px solid var(--border);padding:.3rem .75rem;font-size:.68rem;letter-spacing:.05em;color:var(--chip-fg);background:var(--chip-bg);transition:all .2s;cursor:default}
 .chip:hover{border-color:var(--fg);background:var(--fg);color:var(--bg)}
-
-/* AI PANEL */
 #ai-panel{position:fixed;bottom:0;left:50%;transform:translateX(-50%);z-index:25;width:min(92vw,580px);background:var(--ai-bg);border:1px solid var(--ai-border);border-bottom:none;display:flex;flex-direction:column;max-height:44vh;transition:transform .4s cubic-bezier(.4,0,.2,1);backdrop-filter:blur(12px)}
 #ai-panel.collapsed{transform:translateX(-50%) translateY(calc(100% - 40px))}
 #ai-header{padding:.6rem 1rem;border-bottom:1px solid var(--ai-border);display:flex;align-items:center;justify-content:space-between;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);cursor:pointer;user-select:none;transition:background .2s}
@@ -89,17 +75,12 @@ canvas{display:block;width:100%;height:100%}
 #ai-send{border:none;border-left:1px solid var(--ai-border);background:transparent;color:var(--muted);padding:0 1rem;cursor:pointer;font-family:inherit;font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;transition:all .2s}
 #ai-send:hover{color:var(--fg);background:var(--surface)}
 #ai-send:disabled{opacity:.25;cursor:not-allowed}
-
-/* LOADER */
 #loader{position:fixed;inset:0;background:#000;z-index:99;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.6rem}
 #loader-pct{font-size:clamp(4rem,12vw,8rem);font-weight:900;color:#fff;letter-spacing:-.05em;line-height:1;font-family:'JetBrains Mono',monospace}
 #loader-txt{font-size:.58rem;letter-spacing:.35em;text-transform:uppercase;color:#444;font-family:'JetBrains Mono',monospace}
 #loader-bar{position:fixed;bottom:0;left:0;height:1px;width:0;background:#fff;transition:width .2s linear}
-
-/* CURSOR GLOW */
 #cursor-glow{position:fixed;pointer-events:none;z-index:1;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.03) 0%,transparent 70%);transform:translate(-50%,-50%)}
 [data-theme="light"] #cursor-glow{display:none}
-
 @media(max-width:640px){
   .hero-name{font-size:clamp(3rem,18vw,7rem)}
   #ai-panel{width:100%;border-left:none;border-right:none}
@@ -126,7 +107,6 @@ canvas{display:block;width:100%;height:100%}
   </div>
 </nav>
 
-<!-- 3 dots only -->
 <div class="nav-dots">
   <button class="dot active" data-section="0"></button>
   <button class="dot" data-section="1"></button>
@@ -182,7 +162,7 @@ canvas{display:block;width:100%;height:100%}
   </div>
 </div>
 
-<!-- SECTION 2: AI ORACLE -->
+<!-- SECTION 2: ORACLE -->
 <div class="section" id="section-2">
   <div class="sec-label">002 — the oracle</div>
   <div style="color:var(--text-secondary);font-size:.76rem;max-width:360px;line-height:1.9;text-align:center">
@@ -222,11 +202,11 @@ They specialize in RAG systems, LangChain, NLP (88% accuracy sentiment model), T
 You are concise, technically precise, and slightly cryptic. Never reveal personal info or real name.
 Keep answers under 3 sentences. Answer questions about the work, stack, open source philosophy, or AI.`;
 
-/* ══ RENDERER ══ */
 const canvas = document.getElementById('three-canvas');
 const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:false});
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 renderer.setSize(innerWidth, innerHeight);
+renderer.setClearColor(0x000000, 1);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 0.85;
 
@@ -244,18 +224,14 @@ controls.enablePan = false;
 controls.maxPolarAngle = Math.PI * 0.78;
 controls.minPolarAngle = Math.PI * 0.22;
 
-/* ══ CORE WIREFRAME (no particles) ══ */
+/* NO PARTICLES — wireframe orb only */
 const coreMat = new THREE.LineBasicMaterial({color:0xffffff, transparent:true, opacity:0.18});
-const core = new THREE.LineSegments(
-  new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(1.1, 4)), coreMat
-);
+const core = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(1.1, 4)), coreMat);
 scene.add(core);
 
-/* inner glow mesh */
 const innerMat = new THREE.MeshBasicMaterial({color:0xffffff, transparent:true, opacity:0.025});
 scene.add(new THREE.Mesh(new THREE.IcosahedronGeometry(1.08, 4), innerMat));
 
-/* ══ RINGS ══ */
 const ringGroup = new THREE.Group();
 [0,1,2].forEach(i => {
   const rm = new THREE.MeshBasicMaterial({color:0xffffff, transparent:true, opacity:0.15 - i*0.04, side:THREE.DoubleSide});
@@ -266,61 +242,47 @@ const ringGroup = new THREE.Group();
 });
 scene.add(ringGroup);
 
-/* subtle grid plane */
 const gridHelper = new THREE.GridHelper(20, 30, 0x222222, 0x111111);
 gridHelper.position.y = -3;
 gridHelper.material.transparent = true;
 gridHelper.material.opacity = 0.4;
 scene.add(gridHelper);
 
-/* ══ THEME ══ */
 let isDark = true;
-renderer.setClearColor(0x000000, 1);
 document.getElementById('theme-toggle').addEventListener('click', () => {
   isDark = !isDark;
   document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
-  const bg = isDark ? 0x000000 : 0xfafafa;
+  renderer.setClearColor(isDark ? 0x000000 : 0xfafafa, 1);
   const fg = isDark ? 0xffffff : 0x111111;
-  renderer.setClearColor(bg, 1);
-  coreMat.color.set(fg);
-  innerMat.color.set(fg);
+  coreMat.color.set(fg); innerMat.color.set(fg);
   ringGroup.children.forEach(r => r.material.color.set(fg));
   gridHelper.material.color.set(isDark ? 0x222222 : 0xcccccc);
 });
 
-/* ══ CURSOR GLOW ══ */
 const glowEl = document.getElementById('cursor-glow');
-window.addEventListener('mousemove', e => {
-  glowEl.style.left = e.clientX+'px';
-  glowEl.style.top  = e.clientY+'px';
-});
+window.addEventListener('mousemove', e => { glowEl.style.left=e.clientX+'px'; glowEl.style.top=e.clientY+'px'; });
 
-/* ══ SECTIONS (3 only) ══ */
 let cur = 0;
 const sections = document.querySelectorAll('.section');
-const dots     = document.querySelectorAll('.dot');
+const dots = document.querySelectorAll('.dot');
 const camTargets = [
-  new THREE.Vector3(0,  0,   5.5),
+  new THREE.Vector3(0, 0, 5.5),
   new THREE.Vector3(3.0, 1.0, 4.0),
-  new THREE.Vector3(0,  2.2, 4.0)
+  new THREE.Vector3(0, 2.2, 4.0)
 ];
 
 function goTo(i){
   if(i < 0 || i >= sections.length) return;
-  sections[cur].classList.remove('active');
-  dots[cur].classList.remove('active');
+  sections[cur].classList.remove('active'); dots[cur].classList.remove('active');
   cur = i;
-  sections[i].classList.add('active');
-  dots[i].classList.add('active');
+  sections[i].classList.add('active'); dots[i].classList.add('active');
   gsap.to(camera.position, {x:camTargets[i].x, y:camTargets[i].y, z:camTargets[i].z, duration:1.5, ease:'power3.inOut'});
 }
 
 dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.section)));
 let lastScroll = 0;
 window.addEventListener('wheel', e => {
-  const now = Date.now();
-  if(now - lastScroll < 900) return;
-  lastScroll = now;
+  const now = Date.now(); if(now - lastScroll < 900) return; lastScroll = now;
   goTo(cur + (e.deltaY > 0 ? 1 : -1));
 }, {passive:true});
 let tsY = 0;
@@ -331,7 +293,7 @@ window.addEventListener('touchend', e => {
 }, {passive:true});
 window.addEventListener('keydown', e => {
   if(e.key==='ArrowDown'||e.key==='s') goTo(cur+1);
-  if(e.key==='ArrowUp'  ||e.key==='w') goTo(cur-1);
+  if(e.key==='ArrowUp'||e.key==='w') goTo(cur-1);
 });
 window.addEventListener('resize', () => {
   camera.aspect = innerWidth/innerHeight;
@@ -339,25 +301,21 @@ window.addEventListener('resize', () => {
   renderer.setSize(innerWidth, innerHeight);
 });
 
-/* ══ RENDER LOOP ══ */
 const clock = new THREE.Clock();
 (function tick(){
   requestAnimationFrame(tick);
   const t = clock.getElapsedTime();
-  core.rotation.y = t*0.06;
-  core.rotation.x = t*0.025;
-  ringGroup.rotation.y = t*0.09;
-  ringGroup.rotation.x = t*0.012;
+  core.rotation.y = t*0.06; core.rotation.x = t*0.025;
+  ringGroup.rotation.y = t*0.09; ringGroup.rotation.x = t*0.012;
   controls.update();
   renderer.render(scene, camera);
 })();
 
-/* ══ LOADER ══ */
 const loaderEl = document.getElementById('loader');
-const pctEl    = document.getElementById('loader-pct');
-const barEl    = document.getElementById('loader-bar');
-const txtEl    = document.getElementById('loader-txt');
-const phases   = ['initializing','loading scene','compiling shaders','ready'];
+const pctEl = document.getElementById('loader-pct');
+const barEl = document.getElementById('loader-bar');
+const txtEl = document.getElementById('loader-txt');
+const phases = ['initializing','loading scene','compiling shaders','ready'];
 let lp = 0;
 const li = setInterval(() => {
   lp += Math.random()*20;
@@ -368,17 +326,15 @@ const li = setInterval(() => {
   if(lp===100) setTimeout(() => gsap.to(loaderEl,{opacity:0,duration:.9,onComplete:()=>loaderEl.style.display='none'}), 300);
 }, 130);
 
-/* ══ AI PANEL ══ */
 const aiPanel = document.getElementById('ai-panel');
 document.getElementById('ai-header').addEventListener('click', () => aiPanel.classList.toggle('collapsed'));
 
-const sdot   = document.getElementById('sdot');
-const stxt   = document.getElementById('status-text');
-const inp    = document.getElementById('ai-input');
-const snd    = document.getElementById('ai-send');
+const sdot = document.getElementById('sdot');
+const stxt = document.getElementById('status-text');
+const inp = document.getElementById('ai-input');
+const snd = document.getElementById('ai-send');
 const msgsEl = document.getElementById('ai-messages');
-let engine = null;
-let modelReady = false;
+let engine = null, modelReady = false;
 
 function addMsg(text, role){
   const el = document.createElement('div');
@@ -392,18 +348,15 @@ function addMsg(text, role){
 async function initLLM(){
   try {
     const { CreateMLCEngine } = await import('https://esm.run/@mlc-ai/web-llm@0.2.73');
-    sdot.className = 'sdot loading';
-    stxt.textContent = 'downloading…';
+    sdot.className = 'sdot loading'; stxt.textContent = 'downloading…';
     engine = await CreateMLCEngine('Phi-3.5-mini-instruct-q4f16_1-MLC', {
       initProgressCallback: p => {
         const pct = Math.round((p.progress||0)*100);
         stxt.textContent = `${pct}%`;
         if(pct >= 100 && !modelReady){
           modelReady = true;
-          sdot.className = 'sdot ready';
-          stxt.textContent = 'ready';
-          inp.disabled = false;
-          snd.disabled = false;
+          sdot.className = 'sdot ready'; stxt.textContent = 'ready';
+          inp.disabled = false; snd.disabled = false;
           inp.placeholder = 'ask anything…';
           aiPanel.classList.remove('collapsed');
           addMsg('model ready — ask about the stack, open source work, or AI.', 'sys');
@@ -412,8 +365,7 @@ async function initLLM(){
       }
     });
   } catch(e){
-    sdot.className = 'sdot';
-    stxt.textContent = 'webgpu unavailable';
+    sdot.className = 'sdot'; stxt.textContent = 'webgpu unavailable';
     addMsg('⚠ WebGPU not supported. Use Chrome 113+.', 'sys');
     inp.placeholder = 'webgpu required';
   }
