@@ -4,9 +4,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *'
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -15,21 +17,35 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Generate contribution snake animation
+  snake:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate Snake
+        uses: Platane/snk@v3
+        with:
+          github_user_name: Lolz365
+          outputs: |
+            dist/github-contribution-grid-snake.svg
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
+      - name: Push snake to output branch
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Deploy portfolio site
   deploy:
+    needs: snake
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          # Override commit author display in Actions logs
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Configure git author as Lolz365
-        run: |
-          git config user.name "Lolz365"
-          git config user.email "lolz365@users.noreply.github.com"
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
