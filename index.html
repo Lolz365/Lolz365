@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LOLZ365 — Space</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#000;--fg:#fff;--muted:#444;--dim:#222;--surface:#0a0a0a;--border:#1a1a1a;--accent:#fff}
+[data-theme="light"]{--bg:#fff;--fg:#000;--muted:#aaa;--dim:#ddd;--surface:#f7f7f7;--border:#e0e0e0;--accent:#000}
+html,body{width:100%;height:100%;background:var(--bg);color:var(--fg);font-family:'JetBrains Mono',monospace;overflow:hidden;transition:background .5s,color .5s}
+#canvas-container{position:fixed;inset:0;z-index:0}
+canvas{display:block;width:100%;height:100%}
+
+/* ── NAV ── */
+#nav{position:fixed;top:0;left:0;right:0;z-index:30;padding:1.6rem 2.4rem;display:flex;justify-content:space-between;align-items:center;pointer-events:all}
+.logo{font-size:1rem;font-weight:900;letter-spacing:-.03em;color:var(--fg);text-decoration:none;mix-blend-mode:difference}
+.logo em{font-style:normal;font-weight:300;color:var(--muted)}
+.nav-right{display:flex;gap:.8rem;align-items:center}
+btn,button{font-family:inherit}
+.nav-btn{background:transparent;border:1px solid var(--border);color:var(--fg);padding:.35rem .8rem;font-family:inherit;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem}
+.nav-btn:hover{background:var(--fg);color:var(--bg)}
+
+/* ── SIDE DOTS ── */
+.nav-dots{position:fixed;right:2rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.9rem;z-index:20}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--dim);cursor:pointer;transition:all .35s;border:none;padding:0;outline:none}
+.dot.active{background:var(--fg);transform:scale(1.8)}
+.dot-label{position:fixed;right:3.2rem;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);opacity:0;transition:opacity .2s;white-space:nowrap;pointer-events:none}
+
+/* ── SECTIONS ── */
+.section{position:fixed;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;flex-direction:column;pointer-events:none;opacity:0;transition:opacity .65s cubic-bezier(.4,0,.2,1);text-align:center;padding:5rem 2rem 10rem}
+.section.active{opacity:1;pointer-events:all}
+
+/* ── HERO ── */
+.hero-eyebrow{font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:var(--muted);margin-bottom:1.8rem;opacity:.7}
+.hero-name{font-size:clamp(4.5rem,14vw,12rem);font-weight:900;letter-spacing:-.06em;line-height:.85;color:var(--fg);mix-blend-mode:difference;user-select:none}
+.hero-name .line2{display:block;opacity:.25;font-size:.38em;letter-spacing:.02em;font-weight:300;margin-top:.4rem}
+.hero-sub{font-size:clamp(.65rem,1.2vw,.85rem);color:var(--muted);letter-spacing:.2em;text-transform:uppercase;margin-top:2rem;line-height:2}
+.scroll-hint{position:fixed;bottom:8rem;left:50%;transform:translateX(-50%);font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);animation:bob 2.5s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+/* ── SECTION LABELS ── */
+.sec-label{font-size:.55rem;letter-spacing:.35em;text-transform:uppercase;color:var(--muted);margin-bottom:2.5rem;opacity:.6}
+
+/* ── STACK ── */
+.stack-wrap{display:flex;flex-direction:column;gap:2rem;max-width:700px;width:100%}
+.stack-group{display:flex;flex-direction:column;gap:.7rem}
+.stack-group-name{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);opacity:.5;text-align:left}
+.chips{display:flex;gap:.4rem;flex-wrap:wrap}
+.chip{border:1px solid var(--border);padding:.3rem .75rem;font-size:.68rem;letter-spacing:.06em;color:var(--fg);background:var(--surface);transition:all .2s;cursor:default}
+.chip:hover{border-color:var(--fg);background:var(--fg);color:var(--bg)}
+
+/* ── PROJECTS ── */
+.projects-wrap{display:flex;flex-direction:column;gap:0;max-width:640px;width:100%}
+.project-row{display:grid;grid-template-columns:2.5rem 1fr auto;gap:1rem;align-items:start;padding:1.2rem 0;border-bottom:1px solid var(--border);text-align:left;text-decoration:none;color:inherit;transition:all .2s;cursor:pointer}
+.project-row:first-child{border-top:1px solid var(--border)}
+.project-row:hover .p-name{color:var(--fg)}
+.project-row:hover .p-arrow{opacity:1;transform:translate(2px,-2px)}
+.p-num{font-size:.6rem;color:var(--muted);padding-top:.15rem;opacity:.4}
+.p-name{font-size:.95rem;font-weight:700;letter-spacing:-.02em;color:var(--fg);margin-bottom:.35rem;transition:color .2s}
+.p-desc{font-size:.72rem;color:var(--muted);line-height:1.55}
+.p-tags{display:flex;gap:.3rem;margin-top:.5rem;flex-wrap:wrap}
+.ptag{font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);padding:.1rem .35rem;opacity:.7}
+.p-arrow{font-size:.8rem;color:var(--muted);opacity:0;transition:all .25s;padding-top:.1rem;align-self:start}
+
+/* ── AI PANEL ── */
+#ai-panel{position:fixed;bottom:0;left:50%;transform:translateX(-50%);z-index:25;width:min(92vw,600px);background:var(--surface);border:1px solid var(--border);border-bottom:none;display:flex;flex-direction:column;max-height:42vh;transition:transform .4s cubic-bezier(.4,0,.2,1)}
+#ai-panel.collapsed{transform:translateX(-50%) translateY(calc(100% - 42px))}
+#ai-header{padding:.65rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);cursor:pointer;user-select:none}
+#ai-header:hover #ai-header-label{color:var(--fg)}
+#ai-header-label{transition:color .2s}
+.status-row{display:flex;align-items:center;gap:.5rem}
+.sdot{width:5px;height:5px;border-radius:50%;background:#333;transition:background .3s;flex-shrink:0}
+.sdot.ready{background:#00ff88}
+.sdot.loading{background:#ffb700;animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
+#status-text{font-size:.58rem;letter-spacing:.15em;transition:color .3s}
+#ai-messages{flex:1;overflow-y:auto;padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.8rem;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.msg{font-size:.76rem;line-height:1.6;max-width:88%;animation:fadeUp .25s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.msg.user{align-self:flex-end;color:var(--fg)}
+.msg.ai{align-self:flex-start;color:var(--muted)}
+.msg.sys{align-self:center;color:var(--dim);font-size:.62rem;text-align:center;opacity:.7}
+#ai-input-row{display:flex;border-top:1px solid var(--border)}
+#ai-input{flex:1;background:transparent;border:none;outline:none;padding:.75rem 1.1rem;color:var(--fg);font-family:inherit;font-size:.75rem;caret-color:var(--fg)}
+#ai-input::placeholder{color:var(--dim)}
+#ai-send{border:none;border-left:1px solid var(--border);background:transparent;color:var(--muted);padding:0 1.1rem;cursor:pointer;font-family:inherit;font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;transition:all .2s;white-space:nowrap}
+#ai-send:hover{color:var(--fg)}
+#ai-send:disabled{opacity:.3;cursor:not-allowed}
+
+/* ── LOADER ── */
+#loader{position:fixed;inset:0;background:#000;z-index:99;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.8rem}
+#loader-pct{font-size:clamp(4rem,12vw,8rem);font-weight:900;color:#fff;letter-spacing:-.05em;line-height:1;font-family:'JetBrains Mono',monospace}
+#loader-txt{font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:#333;font-family:'JetBrains Mono',monospace}
+#loader-bar{position:fixed;bottom:0;left:0;height:1px;width:0;background:#fff;transition:width .25s linear}
+
+/* ── CURSOR GLOW ── */
+#cursor-glow{position:fixed;pointer-events:none;z-index:1;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.04) 0%,transparent 70%);transform:translate(-50%,-50%);transition:opacity .4s}
+
+@media(max-width:640px){
+  .hero-name{font-size:clamp(3.5rem,20vw,7rem)}
+  #ai-panel{width:100%;border-left:none;border-right:none}
+  .nav-dots{display:none}
+}
+</style>
+</head>
+<body data-theme="dark">
+
+<div id="loader">
+  <div id="loader-pct">0%</div>
+  <div id="loader-txt">initializing</div>
+  <div id="loader-bar"></div>
+</div>
+
+<div id="cursor-glow"></div>
+<div id="canvas-container"><canvas id="three-canvas"></canvas></div>
+
+<nav id="nav">
+  <a class="logo" href="https://github.com/Lolz365">LOLZ<em>365</em></a>
+  <div class="nav-right">
+    <button class="nav-btn" id="theme-toggle">◐ mode</button>
+    <a class="nav-btn" href="https://github.com/Lolz365" target="_blank">↗ github</a>
+  </div>
+</nav>
+
+<div class="nav-dots">
+  <button class="dot active" data-section="0" title="Home"></button>
+  <button class="dot" data-section="1" title="Stack"></button>
+  <button class="dot" data-section="2" title="Work"></button>
+  <button class="dot" data-section="3" title="AI"></button>
+</div>
+
+<!-- SECTION 0: HERO -->
+<div class="section active" id="section-0">
+  <div class="hero-eyebrow">— the future is unfolding —</div>
+  <div class="hero-name">
+    LOLZ
+    <span class="line2">365 / full-stack · ai · webgl</span>
+  </div>
+  <div class="hero-sub">scroll to explore · drag to rotate · ask the AI</div>
+  <div class="scroll-hint" id="section-0-hint">↓ scroll</div>
+</div>
+
+<!-- SECTION 1: STACK -->
+<div class="section" id="section-1">
+  <div class="sec-label">001 — tools of destruction</div>
+  <div class="stack-wrap">
+    <div class="stack-group">
+      <div class="stack-group-name">languages</div>
+      <div class="chips">
+        <div class="chip">TypeScript</div><div class="chip">Python</div>
+        <div class="chip">Rust</div><div class="chip">JavaScript</div>
+        <div class="chip">SQL</div>
+      </div>
+    </div>
+    <div class="stack-group">
+      <div class="stack-group-name">frontend / 3D</div>
+      <div class="chips">
+        <div class="chip">React</div><div class="chip">Next.js</div>
+        <div class="chip">Three.js</div><div class="chip">GSAP</div>
+        <div class="chip">WebGL / GLSL</div><div class="chip">Tailwind</div>
+      </div>
+    </div>
+    <div class="stack-group">
+      <div class="stack-group-name">AI / ML</div>
+      <div class="chips">
+        <div class="chip">LangChain</div><div class="chip">RAG</div>
+        <div class="chip">PyTorch</div><div class="chip">WebLLM</div>
+        <div class="chip">Prompt Engineering</div>
+      </div>
+    </div>
+    <div class="stack-group">
+      <div class="stack-group-name">infra</div>
+      <div class="chips">
+        <div class="chip">AWS</div><div class="chip">Docker</div>
+        <div class="chip">Linux</div><div class="chip">Vercel</div>
+        <div class="chip">GitHub Actions</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2: PROJECTS -->
+<div class="section" id="section-2">
+  <div class="sec-label">002 — selected work</div>
+  <div class="projects-wrap">
+    <a class="project-row" href="#">
+      <div class="p-num">01</div>
+      <div>
+        <div class="p-name">Tariff Intelligence Chatbot</div>
+        <div class="p-desc">4-week client engagement — AI assistant for trade tariff queries with RAG pipeline and real-time lookup.</div>
+        <div class="p-tags"><span class="ptag">langchain</span><span class="ptag">rag</span><span class="ptag">python</span><span class="ptag">api</span></div>
+      </div>
+      <div class="p-arrow">↗</div>
+    </a>
+    <a class="project-row" href="#">
+      <div class="p-num">02</div>
+      <div>
+        <div class="p-name">Sentiment Analysis Engine</div>
+        <div class="p-desc">NLP model achieving 88% accuracy — fine-tuned transformer with custom training pipeline.</div>
+        <div class="p-tags"><span class="ptag">pytorch</span><span class="ptag">nlp</span><span class="ptag">transformers</span></div>
+      </div>
+      <div class="p-arrow">↗</div>
+    </a>
+    <a class="project-row" href="#">
+      <div class="p-num">03</div>
+      <div>
+        <div class="p-name">ERP Modernization Platform</div>
+        <div class="p-desc">Desktop-to-web conversion of enterprise ERP system using dynamic rendering architecture.</div>
+        <div class="p-tags"><span class="ptag">angular</span><span class="ptag">sap</span><span class="ptag">erp</span><span class="ptag">typescript</span></div>
+      </div>
+      <div class="p-arrow">↗</div>
+    </a>
+    <a class="project-row" href="#">
+      <div class="p-num">04</div>
+      <div>
+        <div class="p-name">Student Marketplace</div>
+        <div class="p-desc">Full-stack peer marketplace platform with real-time listings and user authentication.</div>
+        <div class="p-tags"><span class="ptag">react</span><span class="ptag">node</span><span class="ptag">sql</span></div>
+      </div>
+      <div class="p-arrow">↗</div>
+    </a>
+  </div>
+</div>
+
+<!-- SECTION 3: AI -->
+<div class="section" id="section-3">
+  <div class="sec-label">003 — the oracle</div>
+  <div style="color:var(--muted);font-size:.75rem;max-width:380px;line-height:1.8;text-align:center">
+    a tiny language model runs<br/>
+    entirely in your browser.<br/>
+    <span style="color:var(--dim);font-size:.65rem">no server · no tracking · pure webgpu inference</span>
+  </div>
+</div>
+
+<!-- AI PANEL -->
+<div id="ai-panel">
+  <div id="ai-header">
+    <span id="ai-header-label">// local llm · phi-3.5-mini · webllm</span>
+    <div class="status-row">
+      <div class="sdot" id="sdot"></div>
+      <span id="status-text">loading model…</span>
+      <span style="opacity:.3;margin-left:.3rem">⌃</span>
+    </div>
+  </div>
+  <div id="ai-messages">
+    <div class="msg sys">Phi-3.5-mini · ~2.5GB · runs 100% in your browser via WebGPU. Chrome 113+ required. Cached after first load.</div>
+  </div>
+  <div id="ai-input-row">
+    <input id="ai-input" type="text" placeholder="loading model…" disabled autocomplete="off" />
+    <button id="ai-send" disabled>send ↵</button>
+  </div>
+</div>
+
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"}}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+/* ══ SYSTEM PROMPT — tune AI personality here ══ */
+const SYSTEM_PROMPT = `You are the portfolio AI embedded in Lolz365's personal website. 
+Lolz365 is a full-stack software developer and AI/ML engineer based in Fort Worth, Texas. 
+They specialize in AI systems (RAG, LangChain, NLP), 3D web experiences (Three.js, WebGL), 
+and full-stack development (React, Next.js, Python, Rust). 
+You are concise, technically sharp, and slightly cryptic. 
+Never share personal contact information. 
+Keep all answers under 3 sentences. 
+Answer questions about their work, technical philosophy, and stack.`;
+
+/* ══ RENDERER ══ */
+const canvas = document.getElementById('three-canvas');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:false});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.2;
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(55, innerWidth/innerHeight, 0.1, 1000);
+camera.position.set(0, 0, 5.5);
+
+const controls = new OrbitControls(camera, canvas);
+controls.enableDamping = true;
+controls.dampingFactor = 0.03;
+controls.enableZoom = false;
+controls.autoRotate = true;
+controls.autoRotateSpeed = 0.25;
+controls.enablePan = false;
+controls.maxPolarAngle = Math.PI * 0.75;
+controls.minPolarAngle = Math.PI * 0.25;
+
+/* ══ SHADERS ══ */
+const vertexShader = `
+uniform float uTime;
+uniform float uWave;
+attribute float aSize;
+attribute float aPhase;
+attribute float aArm;
+varying float vAlpha;
+varying float vArm;
+void main(){
+  vec3 p = position;
+  float wave = sin(uTime * 0.4 + aPhase) * uWave;
+  p.y += wave * 0.18;
+  p.x += cos(uTime * 0.25 + aPhase * 1.4) * uWave * 0.08;
+  vec4 mv = modelViewMatrix * vec4(p, 1.);
+  gl_Position = projectionMatrix * mv;
+  float dist = length(position.xz);
+  float proximity = 1. - smoothstep(0., 5., dist);
+  gl_PointSize = aSize * (280. / -mv.z) * (0.6 + 0.4 * proximity);
+  vAlpha = 0.3 + 0.7 * abs(sin(aPhase * 0.7 + uTime * 0.15));
+  vArm = aArm;
+}
+`;
+const fragmentShader = `
+uniform vec3 uColor;
+varying float vAlpha;
+varying float vArm;
+void main(){
+  float d = length(gl_PointCoord - 0.5);
+  if(d > 0.5) discard;
+  float a = smoothstep(0.5, 0.0, d) * vAlpha;
+  // slight color variation per arm
+  vec3 col = uColor * (0.85 + 0.15 * vArm);
+  gl_FragColor = vec4(col, a);
+}
+`;
+
+/* ══ GALAXY PARTICLES ══ */
+const N = 5000;
+const pos = new Float32Array(N*3);
+const sz = new Float32Array(N);
+const ph = new Float32Array(N);
+const arm = new Float32Array(N);
+const ARMS = 3;
+for(let i = 0; i < N; i++){
+  const a = Math.floor(Math.random() * ARMS);
+  const angle = (a / ARMS) * Math.PI * 2 + Math.random() * 0.5;
+  const r = 0.3 + Math.pow(Math.random(), 0.45) * 3.8;
+  const spread = (1 - r/4.5) * 0.35;
+  pos[i*3]   = Math.cos(angle + r * 0.65) * r + (Math.random()-.5) * spread;
+  pos[i*3+1] = (Math.random()-.5) * 0.5 * (1/(1+r*0.3));
+  pos[i*3+2] = Math.sin(angle + r * 0.65) * r + (Math.random()-.5) * spread;
+  sz[i] = Math.random() * 2.8 + 0.4;
+  ph[i] = Math.random() * Math.PI * 2;
+  arm[i] = a / ARMS;
+}
+const pGeo = new THREE.BufferGeometry();
+pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+pGeo.setAttribute('aSize', new THREE.BufferAttribute(sz, 1));
+pGeo.setAttribute('aPhase', new THREE.BufferAttribute(ph, 1));
+pGeo.setAttribute('aArm', new THREE.BufferAttribute(arm, 1));
+const pMat = new THREE.ShaderMaterial({
+  vertexShader, fragmentShader,
+  uniforms:{
+    uTime: {value:0},
+    uWave: {value:1.0},
+    uColor: {value: new THREE.Color(0xffffff)}
+  },
+  transparent:true, depthWrite:false,
+  blending: THREE.AdditiveBlending
+});
+scene.add(new THREE.Points(pGeo, pMat));
+
+/* ══ CORE GEOMETRY ══ */
+const coreGeo = new THREE.IcosahedronGeometry(0.9, 4);
+const coreEdges = new THREE.EdgesGeometry(coreGeo);
+const coreMat = new THREE.LineBasicMaterial({color:0xffffff, transparent:true, opacity:0.07});
+const core = new THREE.LineSegments(coreEdges, coreMat);
+scene.add(core);
+
+/* inner solid */
+const innerMat = new THREE.MeshBasicMaterial({color:0xffffff, transparent:true, opacity:0.015});
+const innerMesh = new THREE.Mesh(new THREE.IcosahedronGeometry(0.88, 4), innerMat);
+scene.add(innerMesh);
+
+/* ══ ORBITAL RINGS ══ */
+const ringGroup = new THREE.Group();
+[0,1,2].forEach((i) => {
+  const rm = new THREE.MeshBasicMaterial({color:0xffffff, transparent:true, opacity:0.1 - i*0.025, side:THREE.DoubleSide});
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(1.5 + i*0.55, 0.004, 2, 140), rm);
+  ring.rotation.x = Math.PI/3 + i*(Math.PI/5);
+  ring.rotation.z = i*(Math.PI/4);
+  ringGroup.add(ring);
+});
+scene.add(ringGroup);
+
+/* ══ NEBULA GLOW PLANES ══ */
+const glowGeo = new THREE.PlaneGeometry(8, 8);
+const glowMat = new THREE.MeshBasicMaterial({
+  color:0xffffff,transparent:true,opacity:0.0,
+  blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.DoubleSide
+});
+const glow = new THREE.Mesh(glowGeo, glowMat);
+glow.rotation.x = Math.PI/2; scene.add(glow);
+
+/* ══ THEME ══ */
+let isDark = true;
+renderer.setClearColor(0x000000, 1);
+document.getElementById('theme-toggle').addEventListener('click', () => {
+  isDark = !isDark;
+  document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  const bg = isDark ? 0x000000 : 0xffffff;
+  const fg = isDark ? 0xffffff : 0x000000;
+  renderer.setClearColor(bg, 1);
+  pMat.uniforms.uColor.value.set(fg);
+  coreMat.color.set(fg);
+  ringGroup.children.forEach(r => r.material.color.set(fg));
+});
+
+/* ══ CURSOR GLOW ══ */
+const glow2 = document.getElementById('cursor-glow');
+window.addEventListener('mousemove', e => {
+  glow2.style.left = e.clientX+'px';
+  glow2.style.top = e.clientY+'px';
+});
+
+/* ══ SECTIONS & CAMERA POSITIONS ══ */
+let cur = 0;
+const sections = document.querySelectorAll('.section');
+const dots = document.querySelectorAll('.dot');
+const camTargets = [
+  {pos: new THREE.Vector3(0, 0, 5.5), rot: 0},
+  {pos: new THREE.Vector3(3.5, 1.2, 4), rot: 1},
+  {pos: new THREE.Vector3(-3, -1, 4.2), rot: -1},
+  {pos: new THREE.Vector3(0, 2.8, 3.8), rot: 0}
+];
+
+function goTo(i){
+  if(i < 0 || i >= sections.length) return;
+  sections[cur].classList.remove('active');
+  dots[cur].classList.remove('active');
+  cur = i;
+  sections[i].classList.add('active');
+  dots[i].classList.add('active');
+  const t = camTargets[i];
+  gsap.to(camera.position, {
+    x: t.pos.x, y: t.pos.y, z: t.pos.z,
+    duration: 1.6, ease: 'power3.inOut'
+  });
+  gsap.to(pMat.uniforms.uWave, {value: 0.5 + i*0.4, duration:1.2, ease:'power2.inOut'});
+}
+
+dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.section)));
+
+let lastScroll = 0;
+window.addEventListener('wheel', e => {
+  const now = Date.now();
+  if(now - lastScroll < 900) return;
+  lastScroll = now;
+  goTo(cur + (e.deltaY > 0 ? 1 : -1));
+}, {passive:true});
+
+let touchStartY = 0;
+window.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, {passive:true});
+window.addEventListener('touchend', e => {
+  const d = touchStartY - e.changedTouches[0].clientY;
+  if(Math.abs(d) > 45){
+    const now = Date.now();
+    if(now - lastScroll < 900) return;
+    lastScroll = now;
+    goTo(cur + (d > 0 ? 1 : -1));
+  }
+}, {passive:true});
+
+/* keyboard */
+window.addEventListener('keydown', e => {
+  if(e.key === 'ArrowDown' || e.key === 's') goTo(cur+1);
+  if(e.key === 'ArrowUp'   || e.key === 'w') goTo(cur-1);
+});
+
+/* resize */
+window.addEventListener('resize', () => {
+  camera.aspect = innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+
+/* ══ RENDER LOOP ══ */
+const clock = new THREE.Clock();
+(function tick(){
+  requestAnimationFrame(tick);
+  const t = clock.getElapsedTime();
+  pMat.uniforms.uTime.value = t;
+  core.rotation.y = t * 0.06;
+  core.rotation.x = t * 0.025;
+  ringGroup.rotation.y = t * 0.09;
+  ringGroup.rotation.x = t * 0.015;
+  innerMesh.rotation.y = -t * 0.04;
+  controls.update();
+  renderer.render(scene, camera);
+})();
+
+/* ══ LOADER ══ */
+const loaderEl = document.getElementById('loader');
+const pctEl = document.getElementById('loader-pct');
+const barEl = document.getElementById('loader-bar');
+const txtEl = document.getElementById('loader-txt');
+let lp = 0;
+const msgs = ['initializing','loading scene','compiling shaders','ready'];
+const li = setInterval(() => {
+  lp += Math.random() * 22;
+  if(lp >= 100){ lp = 100; clearInterval(li); }
+  pctEl.textContent = Math.floor(lp)+'%';
+  barEl.style.width = lp+'%';
+  txtEl.textContent = msgs[Math.floor(lp/30)];
+  if(lp === 100){
+    setTimeout(() => gsap.to(loaderEl,{opacity:0,duration:.9,onComplete:()=>loaderEl.style.display='none'}), 350);
+  }
+}, 140);
+
+/* ══ AI PANEL COLLAPSE ══ */
+const aiPanel = document.getElementById('ai-panel');
+document.getElementById('ai-header').addEventListener('click', () => {
+  aiPanel.classList.toggle('collapsed');
+});
+
+/* ══ CLIENT-SIDE LLM — WebLLM ══ */
+const sdot = document.getElementById('sdot');
+const stxt = document.getElementById('status-text');
+const inp  = document.getElementById('ai-input');
+const snd  = document.getElementById('ai-send');
+const msgsEl = document.getElementById('ai-messages');
+let engine = null;
+
+function addMsg(text, role){
+  const el = document.createElement('div');
+  el.className = `msg ${role}`;
+  el.textContent = text;
+  msgsEl.appendChild(el);
+  msgsEl.scrollTop = msgsEl.scrollHeight;
+  return el;
+}
+
+async function initLLM(){
+  try {
+    const { CreateMLCEngine } = await import('https://esm.run/@mlc-ai/web-llm@0.2.73');
+    sdot.className = 'sdot loading';
+    stxt.textContent = 'downloading…';
+    aiPanel.classList.remove('collapsed');
+    engine = await CreateMLCEngine('Phi-3.5-mini-instruct-q4f16_1-MLC', {
+      initProgressCallback: p => {
+        const pct = Math.round(p.progress * 100);
+        stxt.textContent = `loading… ${pct}%`;
+        if(pct >= 100){
+          sdot.className = 'sdot ready';
+          stxt.textContent = 'ready';
+          inp.disabled = false;
+          snd.disabled = false;
+          inp.placeholder = 'ask anything…';
+          inp.focus();
+          addMsg('model loaded — ask me about the work, stack, or philosophy.', 'sys');
+        }
+      }
+    });
+  } catch(e){
+    sdot.className = 'sdot';
+    stxt.textContent = 'webgpu unavailable';
+    addMsg('⚠ WebGPU not supported. Try Chrome 113+.', 'sys');
+    inp.placeholder = 'webgpu required';
+  }
+}
+
+async function sendMsg(){
+  const text = inp.value.trim();
+  if(!text || !engine) return;
+  inp.value = '';
+  addMsg(text, 'user');
+  const reply = addMsg('…', 'ai');
+  inp.disabled = true;
+  snd.disabled = true;
+  try {
+    const stream = await engine.chat.completions.create({
+      messages: [{role:'system', content:SYSTEM_PROMPT}, {role:'user', content:text}],
+      temperature: 0.7, max_tokens: 220, stream: true
+    });
+    let out = '';
+    for await(const chunk of stream){
+      out += chunk.choices[0]?.delta?.content || '';
+      reply.textContent = out;
+      msgsEl.scrollTop = msgsEl.scrollHeight;
+    }
+  } catch(e){ reply.textContent = 'error: '+e.message; }
+  finally { inp.disabled = false; snd.disabled = false; inp.focus(); }
+}
+
+snd.addEventListener('click', sendMsg);
+inp.addEventListener('keydown', e => { if(e.key === 'Enter') sendMsg(); });
+initLLM();
+</script>
+</body>
+</html>
