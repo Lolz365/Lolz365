@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════
-   Video Switcher
+   Video Scene Carousel
 ════════════════════════════════════════ */
 const videos = document.querySelectorAll('.bg-video');
 const vsBtns = document.querySelectorAll('.vs-btn');
@@ -7,6 +7,8 @@ const heroContent = document.getElementById('heroContent');
 
 let activeVideo = 0;
 let isTransitioning = false;
+let carouselTimer = null;
+const CAROUSEL_INTERVAL = 6000;
 
 function switchVideo(index) {
   if (index === activeVideo || isTransitioning) return;
@@ -26,14 +28,43 @@ function switchVideo(index) {
     heroContent.classList.remove('dark-mode');
   }
 
-  setTimeout(() => { isTransitioning = false; }, 1000);
+  setTimeout(() => { isTransitioning = false; }, 1200);
+}
+
+function nextScene() {
+  const next = (activeVideo + 1) % videos.length;
+  switchVideo(next);
+}
+
+function startCarousel() {
+  stopCarousel();
+  carouselTimer = setInterval(nextScene, CAROUSEL_INTERVAL);
+}
+
+function stopCarousel() {
+  if (carouselTimer) {
+    clearInterval(carouselTimer);
+    carouselTimer = null;
+  }
 }
 
 vsBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     switchVideo(parseInt(btn.dataset.index, 10));
+    startCarousel(); // reset timer on manual interaction
   });
 });
+
+// Pause carousel when tab is hidden, resume when visible
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    stopCarousel();
+  } else {
+    startCarousel();
+  }
+});
+
+startCarousel();
 
 /* ═══════════════════════════════════════
    Mobile Menu
