@@ -1,55 +1,77 @@
-/* ── Burger / Mobile Menu ── */
-const burger     = document.getElementById('burgerBtn');
-const mobileMenu = document.getElementById('mobileMenu');
-const overlay    = document.getElementById('mobileOverlay');
+/* ═══════════════════════════════════════
+   Video Switcher
+════════════════════════════════════════ */
+const videos = document.querySelectorAll('.bg-video');
+const vsBtns = document.querySelectorAll('.vs-btn');
+const heroContent = document.getElementById('heroContent');
 
-function openMenu() {
-  burger.setAttribute('aria-expanded','true');
-  mobileMenu.hidden = false;
-  overlay.hidden = false;
-  document.body.classList.add('menu-open');
-  mobileMenu.querySelectorAll('a').forEach(a => {
-    a.style.animation = 'none';
-    a.offsetHeight;
-    a.style.animation = '';
-  });
+let activeVideo = 0;
+let isTransitioning = false;
+
+function switchVideo(index) {
+  if (index === activeVideo || isTransitioning) return;
+  isTransitioning = true;
+
+  videos[activeVideo].classList.remove('active');
+  vsBtns[activeVideo].classList.remove('active');
+
+  activeVideo = index;
+  videos[activeVideo].classList.add('active');
+  vsBtns[activeVideo].classList.add('active');
+
+  // Deep Woods (index 2) = dark mode
+  if (activeVideo === 2) {
+    heroContent.classList.add('dark-mode');
+  } else {
+    heroContent.classList.remove('dark-mode');
+  }
+
+  setTimeout(() => { isTransitioning = false; }, 1000);
 }
-function closeMenu() {
-  burger.setAttribute('aria-expanded','false');
-  mobileMenu.hidden = true;
-  overlay.hidden = true;
-  document.body.classList.remove('menu-open');
-}
-burger.addEventListener('click', () =>
-  burger.getAttribute('aria-expanded') === 'true' ? closeMenu() : openMenu()
-);
-overlay.addEventListener('click', closeMenu);
-document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); });
-mobileMenu.querySelectorAll('a[data-section]').forEach(a => {
-  a.addEventListener('click', e => {
-    e.preventDefault();
-    closeMenu();
-    if(window.goTo) goTo(+a.dataset.section);
+
+vsBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    switchVideo(parseInt(btn.dataset.index, 10));
   });
 });
-window.addEventListener('resize', () => { if(window.innerWidth > 720) closeMenu(); });
 
-/* ── Count-up stats ── */
-function easeOutCubic(t) { return 1 - Math.pow(1-t, 3); }
+/* ═══════════════════════════════════════
+   Mobile Menu
+════════════════════════════════════════ */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileMenuBackdrop = document.getElementById('mobileMenuBackdrop');
+const hamOpen = document.getElementById('hamOpen');
+const hamClose = document.getElementById('hamClose');
 
-function animateCounter(el, i) {
-  const target   = parseFloat(el.dataset.target);
-  const suffix   = el.dataset.suffix;
-  const decimals = parseInt(el.dataset.decimals, 10);
-  const duration = 1500 + i * 80;
-  const delay    = 480  + i * 90;
-  let start = null;
-  setTimeout(() => {
-    function step(ts) {
-      if(!start) start = ts;
-      const elapsed  = ts - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const value    = easeOutCubic(progress) * target;
-      el.textContent = value.toFixed(decimals) + suffix;
-      if(progress < 1) requestAnimationFrame(step);
-   
+let menuOpen = false;
+
+function toggleMenu() {
+  menuOpen = !menuOpen;
+  mobileMenu.classList.toggle('open', menuOpen);
+  hamOpen.classList.toggle('hidden', menuOpen);
+  hamClose.classList.toggle('hidden', !menuOpen);
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+}
+
+hamburger.addEventListener('click', toggleMenu);
+mobileMenuBackdrop.addEventListener('click', toggleMenu);
+
+document.querySelectorAll('.mobile-link, .mobile-cta').forEach(link => {
+  link.addEventListener('click', () => {
+    if (menuOpen) toggleMenu();
+  });
+});
+
+/* ═══════════════════════════════════════
+   Smooth Scroll for nav links
+════════════════════════════════════════ */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', e => {
+    const target = document.querySelector(anchor.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
