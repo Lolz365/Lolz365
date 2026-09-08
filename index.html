@@ -1,276 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Likhith Avileli — AI & Full-Stack Engineer</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4efe6">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Lolz365 — Information Systems graduate in Frisco, Texas. AI agents, ERP, and interfaces that survive contact with real users.">
+  <title>Lolz365 — Field Notes from a Builder</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://cdn.credly.com">
+  <link rel="preconnect" href="https://www.credly.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
+  <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-
-<!-- ═══════════════════════════════════════
-     HERO SECTION
-════════════════════════════════════════ -->
-<section class="hero" id="hero">
-
-  <!-- Video Background -->
-  <div class="video-layer">
-    <video class="bg-video active" id="v0" autoplay muted loop playsinline src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260702_081127_0992a171-d3c6-4978-8213-0ec5df8b6d63.mp4"></video>
-    <video class="bg-video" id="v1" autoplay muted loop playsinline src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260702_092026_dd05b805-ea0f-40b2-8c52-332b88502592.mp4"></video>
-    <video class="bg-video" id="v2" autoplay muted loop playsinline src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260702_081042_df7202bf-bd80-4b2b-bbc6-1f09ba2870e9.mp4"></video>
-    <video class="bg-video" id="v3" autoplay muted loop playsinline src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260702_080959_4cac5234-3573-464e-a5b7-76b94b8a7d61.mp4"></video>
-  </div>
-
-  <!-- PNG Overlay -->
-  <div class="png-overlay">
-    <img src="https://soft-zoom-63098134.figma.site/_assets/v11/0b4a435b2df2747593c43d7a1c9b4578f7d8d90c.png" alt="" />
-  </div>
-
-  <!-- Gradient vignette -->
-  <div class="vignette"></div>
-
-  <!-- Content Layer -->
-  <div class="hero-content" id="heroContent">
-
-    <!-- NAV -->
-    <nav class="hero-nav">
-      <a href="#" class="logo">Likhith Avileli</a>
-
-      <!-- Desktop Nav -->
-      <div class="nav-pill liquid-glass" id="desktopNav">
-        <a href="#work" class="nav-link">Work</a>
-        <a href="#skills" class="nav-link">Skills</a>
-        <a href="#about" class="nav-link">About</a>
-        <a href="https://www.linkedin.com/in/likhithavileli?utm_source=share_via&utm_content=profile&utm_medium=member_ios" class="nav-link" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="mailto:lolz365ai@gmail.com" class="nav-cta">Hire Me</a>
-      </div>
-
-      <!-- Mobile Hamburger -->
-      <button class="hamburger liquid-glass" id="hamburger" aria-label="Menu">
-        <span class="ham-icon" id="hamOpen">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        </span>
-        <span class="ham-icon hidden" id="hamClose">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </span>
-      </button>
+  <a class="skip-link" href="#work">Skip to work</a>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="mast">
+    <p class="kicker">Frisco, Texas · UTA Information Systems · Open to work</p>
+    <p class="mark">Lolz365</p>
+    <nav aria-label="Primary">
+      <ul class="nav-list">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#craft">Craft</a></li>
+        <li><a href="#credentials">Credentials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </nav>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-      <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
-      <div class="mobile-menu-panel">
-        <a href="#work" class="mobile-link" style="transition-delay:100ms">Work</a>
-        <a href="#skills" class="mobile-link" style="transition-delay:150ms">Skills</a>
-        <a href="#about" class="mobile-link" style="transition-delay:200ms">About</a>
-        <a href="https://www.linkedin.com/in/likhithavileli?utm_source=share_via&utm_content=profile&utm_medium=member_ios" class="mobile-link" target="_blank" rel="noopener" style="transition-delay:250ms">LinkedIn</a>
-        <a href="mailto:lolz365ai@gmail.com" class="mobile-cta" style="transition-delay:300ms">Hire Me</a>
-      </div>
-    </div>
-
-    <!-- Hero Main -->
-    <div class="hero-main">
-      <div class="hero-badge liquid-glass" id="heroBadge">
-        <span class="badge-dot"></span>
-        Available for opportunities &amp; collaborations
-      </div>
-
-      <h1 class="hero-heading" id="heroHeading">
-        Building the Future,<br /><em>One Intelligent System</em><br />at a Time
-      </h1>
-
-      <p class="hero-sub" id="heroSub">
-        AI engineer &amp; full-stack developer. I craft AI-powered applications, contribute to open source, and help teams move faster with intelligent tooling.
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Use dark theme</button>
+  </header>
+  <main>
+    <section class="hero" aria-labelledby="lede">
+      <h1 id="lede">I make enterprise systems and AI agents share a brain.</h1>
+      <p class="lede">Most portfolios promise passion. Mine is a desk: ERP process, RAG with receipts, and interfaces that still work when a tired operator has one hand on a keyboard.</p>
+      <p class="lede-note">B.S. Information Systems, University of Texas at Arlington. Python, TypeScript, SQL, React, Docker, Linux. I climb, I ship, I document both.</p>
+      <p class="hero-actions">
+        <a class="btn" href="mailto:lolz365ai@gmail.com">Email me</a>
+        <a class="btn btn-ghost" href="https://github.com/Lolz365">Open GitHub</a>
       </p>
-
-      <div class="hero-actions">
-        <a href="#work" class="btn-primary" id="heroCta">View My Work</a>
-        <a href="mailto:lolz365ai@gmail.com" class="btn-ghost liquid-glass" id="heroGhost">Let's Talk</a>
-      </div>
-
-      <!-- Video Switcher -->
-      <div class="video-switcher" id="videoSwitcher">
-        <button class="vs-btn active" data-index="0">Golden Hour</button>
-        <button class="vs-btn" data-index="1">Still Water</button>
-        <button class="vs-btn" data-index="2">Deep Woods</button>
-        <button class="vs-btn" data-index="3">Quiet Dawn</button>
-      </div>
-    </div>
-
-    <!-- Flex spacer -->
-    <div class="flex-spacer"></div>
-
-    <!-- Stats -->
-    <div class="hero-stats">
-      <span>Full-Stack Development</span>
-      <span class="stat-div">|</span>
-      <span>AI &amp; LLM Integration</span>
-      <span class="stat-div">|</span>
-      <span>Open Source Contributor</span>
-      <span class="stat-div">|</span>
-      <span>Enterprise &amp; ERP Systems</span>
-    </div>
-
-  </div><!-- /hero-content -->
-</section>
-
-<!-- ═══════════════════════════════════════
-     WORK SECTION
-════════════════════════════════════════ -->
-<section class="section" id="work">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-tag">Selected Work</span>
-      <h2 class="section-title">Projects That <em>Ship</em></h2>
-      <p class="section-sub">A curated set of things I've built — from AI agents to full-stack apps.</p>
-    </div>
-    <div class="projects-grid">
-
-      <article class="project-card">
-        <div class="project-thumb" style="background:linear-gradient(135deg,#0f2027,#203a43,#2c5364)">
-          <span class="project-tag">AI / RAG</span>
+    </section>
+    <section id="work" class="band" aria-labelledby="work-title">
+      <h2 id="work-title">Selected Work</h2>
+      <p class="band-intro">Shipped things, not hypotheticals. Click through if you want the seams.</p>
+      <ul class="work-grid">
+        <li>
+          <article class="card">
+            <p class="card-meta">Python · offline agents</p>
+            <h3><a href="https://github.com/Lolz365/CrisisMesh-AI">CrisisMesh AI</a></h3>
+            <p>Emergency command that keeps running when the tower does not. Built for the AMD AI DevMaster Hackathon, Track 2.</p>
+          </article>
+        </li>
+        <li>
+          <article class="card">
+            <p class="card-meta">TypeScript · local inference</p>
+            <h3><a href="https://github.com/Lolz365/pocketagent-site">PocketAgent</a></h3>
+            <p>A coding agent that lives on a USB stick. No install. No cloud. No leftover profile on the host machine.</p>
+          </article>
+        </li>
+        <li>
+          <article class="card">
+            <p class="card-meta">Next.js · MediaPipe</p>
+            <h3><a href="https://github.com/Lolz365/ASL-CV">ASL-CV</a></h3>
+            <p>American Sign Language in the browser. Hands stay on-device. The model never phones home.</p>
+          </article>
+        </li>
+        <li>
+          <article class="card">
+            <p class="card-meta">JavaScript · reader UI</p>
+            <h3><a href="https://github.com/Lolz365/manga-browser">Manga Browser</a></h3>
+            <p>Ad-blocked, adapter-driven, Zen-inspired chrome for people who actually read. Privacy is the default, not a toggle buried in settings.</p>
+          </article>
+        </li>
+        <li>
+          <article class="card">
+            <p class="card-meta">TypeScript · Obsidian</p>
+            <h3><a href="https://github.com/Lolz365/chronicle">Chronicle</a></h3>
+            <p>Local-first operating system for time, tasks, and the reports a hiring manager can actually read.</p>
+          </article>
+        </li>
+        <li>
+          <article class="card">
+            <p class="card-meta">React · Remotion</p>
+            <h3><a href="https://github.com/Lolz365/remotion-test">Genesis</a></h3>
+            <p>Cinematic motion, 100% procedural. Proof that I can design in time, not only in Figma frames.</p>
+          </article>
+        </li>
+      </ul>
+    </section>
+    <section id="craft" class="band band-alt" aria-labelledby="craft-title">
+      <h2 id="craft-title">How the Desk Is Arranged</h2>
+      <div class="split">
+        <div>
+          <h3>Enterprise</h3>
+          <p>WalkMe language, SAP learning paths, ERP tables that lie until you join them twice. I like the unglamorous work of making software adoptable.</p>
         </div>
-        <div class="project-body">
-          <h3>Knowledge Graph RAG</h3>
-          <p>Retrieval-augmented generation pipeline with Neo4j knowledge graphs, semantic chunking, and LangChain agents for enterprise document Q&amp;A.</p>
-          <div class="project-stack">Python · LangChain · Neo4j · FastAPI</div>
-          <a href="https://github.com/Lolz365" class="project-link" target="_blank" rel="noopener">View on GitHub →</a>
+        <div>
+          <h3>Agents</h3>
+          <p>RAG, knowledge graphs, n8n, Colab, local weights. If an agent cannot show its sources, it is a parlor trick.</p>
         </div>
-      </article>
-
-      <article class="project-card">
-        <div class="project-thumb" style="background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)">
-          <span class="project-tag">Full-Stack</span>
+        <div>
+          <h3>Interface</h3>
+          <p>Semantic HTML, visible focus, <code>prefers-reduced-motion</code>, and copy that talks to you, not at a brand voice guide.</p>
         </div>
-        <div class="project-body">
-          <h3>ERP Workflow Automation</h3>
-          <p>Digital adoption platform built on SAP concepts with WalkMe-style guided workflows, role-based dashboards, and real-time analytics.</p>
-          <div class="project-stack">React · TypeScript · Node.js · PostgreSQL</div>
-          <a href="https://github.com/Lolz365" class="project-link" target="_blank" rel="noopener">View on GitHub →</a>
-        </div>
-      </article>
-
-      <article class="project-card">
-        <div class="project-thumb" style="background:linear-gradient(135deg,#0d0d0d,#1a1a1a,#2d2d2d)">
-          <span class="project-tag">AI Agent</span>
-        </div>
-        <div class="project-body">
-          <h3>Sentiment Analysis Pipeline</h3>
-          <p>Multi-model sentiment engine with real-time streaming, n8n orchestration, and a React dashboard for social media monitoring at scale.</p>
-          <div class="project-stack">Python · n8n · React · Docker</div>
-          <a href="https://github.com/Lolz365" class="project-link" target="_blank" rel="noopener">View on GitHub →</a>
-        </div>
-      </article>
-
-      <article class="project-card">
-        <div class="project-thumb" style="background:linear-gradient(135deg,#1c1c1c,#2e1760,#4a1776)">
-          <span class="project-tag">Open Source</span>
-        </div>
-        <div class="project-body">
-          <h3>Self-Hosted AI Stack</h3>
-          <p>Dockerized local inference environment with Ollama, Open WebUI, Tailscale networking, and automated model management scripts.</p>
-          <div class="project-stack">Docker · Linux · Ollama · Tailscale</div>
-          <a href="https://github.com/Lolz365" class="project-link" target="_blank" rel="noopener">View on GitHub →</a>
-        </div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════
-     SKILLS SECTION
-════════════════════════════════════════ -->
-<section class="section section-dark" id="skills">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-tag">Capabilities</span>
-      <h2 class="section-title">What I <em>Bring</em></h2>
-    </div>
-    <div class="skills-grid">
-      <div class="skill-card">
-        <div class="skill-icon">⚡</div>
-        <h3>AI &amp; LLM Engineering</h3>
-        <p>RAG pipelines, AI agents, fine-tuning, local inference, LangChain, LlamaIndex, and prompt engineering for production systems.</p>
       </div>
-      <div class="skill-card">
-        <div class="skill-icon">🔧</div>
-        <h3>Full-Stack Development</h3>
-        <p>React, TypeScript, Node.js, Python (FastAPI/Flask), PostgreSQL, REST &amp; GraphQL APIs — from prototype to production.</p>
+    </section>
+    <section id="credentials" class="band" aria-labelledby="cred-title">
+      <h2 id="cred-title">Verified Credentials</h2>
+      <p class="band-intro">Official Credly widgets. Click a badge to verify the record. More will land here as they issue.</p>
+      <div class="badge-row">
+        <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="3aefb07e-c7e4-4348-a4a0-d3dc8b68e522" data-share-badge-host="https://www.credly.com"></div>
+        <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="99ae2647-8414-4133-89b8-f899f744e81c" data-share-badge-host="https://www.credly.com"></div>
+        <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="d40f520a-3358-48a4-be63-25c0ef69a987" data-share-badge-host="https://www.credly.com"></div>
+        <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="1a028770-034d-4807-ab5f-3530cac41af7" data-share-badge-host="https://www.credly.com"></div>
+        <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="cbe80633-46dd-4ff5-b3fa-8cd855ae57cf" data-share-badge-host="https://www.credly.com"></div>
       </div>
-      <div class="skill-card">
-        <div class="skill-icon">🏗️</div>
-        <h3>DevOps &amp; Infrastructure</h3>
-        <p>Docker, GitHub Actions CI/CD, cloud deployments, self-hosted infrastructure, and Linux server management.</p>
-      </div>
-      <div class="skill-card">
-        <div class="skill-icon">🏢</div>
-        <h3>Enterprise &amp; ERP</h3>
-        <p>SAP concepts, WalkMe digital adoption, business process automation, and workflow orchestration with n8n.</p>
-      </div>
-    </div>
-    <div class="tech-pills">
-      <span>Python</span><span>TypeScript</span><span>JavaScript</span><span>Rust</span><span>SQL</span>
-      <span>React</span><span>React Native</span><span>Node.js</span><span>FastAPI</span>
-      <span>LangChain</span><span>Docker</span><span>Git</span><span>n8n</span><span>Tailscale</span>
-      <span>Neo4j</span><span>PostgreSQL</span><span>Linux</span><span>GitHub Actions</span>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════
-     ABOUT SECTION
-════════════════════════════════════════ -->
-<section class="section" id="about">
-  <div class="container about-layout">
-    <div class="about-text">
-      <span class="section-tag">About</span>
-      <h2 class="section-title">Engineer. Builder.<br /><em>Problem Solver.</em></h2>
-      <p>Information Systems graduate from UT Arlington, based in Frisco, TX. I sit at the intersection of AI and product — I care about systems that actually work in the real world, not just demos.</p>
-      <p>I'm happiest when building AI pipelines, contributing to open source, or helping a team ship faster. I'm open to full-stack roles, forward-deployed engineering, and AI/data positions.</p>
-      <div class="about-links">
-        <a href="https://github.com/Lolz365" target="_blank" rel="noopener" class="about-link">GitHub</a>
-        <a href="https://www.linkedin.com/in/likhithavileli?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noopener" class="about-link">LinkedIn</a>
-        <a href="mailto:lolz365ai@gmail.com" class="about-link">Email</a>
-      </div>
-    </div>
-    <div class="about-card-wrap">
-      <div class="about-card">
-        <div class="about-stat"><strong>10+</strong><span>Projects Built</span></div>
-        <div class="about-stat"><strong>4+</strong><span>Languages</span></div>
-        <div class="about-stat"><strong>∞</strong><span>Curiosity</span></div>
-        <div class="about-badge">Open to Work ✓</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════
-     CONTACT / CTA SECTION
-════════════════════════════════════════ -->
-<section class="section cta-section" id="contact">
-  <div class="container cta-inner">
-    <h2 class="cta-heading">Let's build something<br /><em>worth building.</em></h2>
-    <p class="cta-sub">Whether it's an AI feature, a full product, or an open-source contribution — I'm ready to make it happen.</p>
-    <a href="mailto:lolz365ai@gmail.com" class="btn-primary btn-large">Get In Touch</a>
-  </div>
-</section>
-
-<!-- Footer -->
-<footer class="footer">
-  <div class="container footer-inner">
-    <span class="logo footer-logo">Likhith Avileli</span>
-    <span class="footer-copy">© 2026 · Frisco, TX · Open to relocation</span>
-    <div style="display:flex; gap:1.25rem;">
-      <a href="https://www.linkedin.com/in/likhithavileli?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noopener" class="footer-gh">LinkedIn ↗</a>
-      <a href="https://github.com/Lolz365" target="_blank" rel="noopener" class="footer-gh">GitHub ↗</a>
-    </div>
-  </div>
-</footer>
-
-<script src="main.js"></script>
+      <noscript>
+        <ul>
+          <li><a href="https://www.credly.com/badges/3aefb07e-c7e4-4348-a4a0-d3dc8b68e522/public_url">Verify credential 1 on Credly</a></li>
+          <li><a href="https://www.credly.com/badges/99ae2647-8414-4133-89b8-f899f744e81c/public_url">Verify credential 2 on Credly</a></li>
+          <li><a href="https://www.credly.com/badges/d40f520a-3358-48a4-be63-25c0ef69a987/public_url">Verify credential 3 on Credly</a></li>
+          <li><a href="https://www.credly.com/badges/1a028770-034d-4807-ab5f-3530cac41af7/public_url">Verify credential 4 on Credly</a></li>
+          <li><a href="https://www.credly.com/badges/cbe80633-46dd-4ff5-b3fa-8cd855ae57cf/public_url">Verify credential 5 on Credly</a></li>
+        </ul>
+      </noscript>
+    </section>
+    <section id="contact" class="band close" aria-labelledby="contact-title">
+      <h2 id="contact-title">If You Are Hiring</h2>
+      <p>I want software, AI, data, or forward-deployed engineering work where the customer is in the room. Send the messy brief.</p>
+      <p><a class="btn" href="mailto:lolz365ai@gmail.com">lolz365ai@gmail.com</a></p>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; <time data-year datetime="2026">2026</time> Lolz365. Built as a static page on purpose.</p>
+  </footer>
+  <script src="./main.js" defer></script>
+  <script type="text/javascript" async src="https://cdn.credly.com/assets/utilities/embed.js"></script>
 </body>
 </html>
